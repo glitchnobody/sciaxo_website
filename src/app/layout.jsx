@@ -1,5 +1,6 @@
 import { Be_Vietnam_Pro, Atkinson_Hyperlegible } from 'next/font/google';
 import './globals.scss';
+import GlobalNav from './GlobalNav';
 
 export const metadata = {
   title: 'Sciaxo',
@@ -25,7 +26,12 @@ const Atkinson = Atkinson_Hyperlegible({
 export default function RootLayout({ children }) {
   return (
     <html className={`${BeVietnam.variable} ${Atkinson.variable} `} lang='en'>
-      <body>{children}</body>
+      <body>
+        <nav>
+          <GlobalNav />
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
