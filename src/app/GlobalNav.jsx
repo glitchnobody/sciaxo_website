@@ -1,18 +1,66 @@
 'use client';
-import React from 'react';
-import Styles from './GlobalNav.module.scss';
+import React, { useLayoutEffect, useRef, useEffect, Component } from 'react';
+import styles from './GlobalNav.module.scss';
+import gsap from 'gsap';
 
 export default function GlobalNav() {
+  const burgerContainer = useRef();
+  const firstLine = useRef();
+  const secondLine = useRef();
+
+  const tlHoverBurger = useRef(null);
+
+  useEffect(() => {
+    tlHoverBurger.current = gsap.timeline({
+      paused: true,
+      defaults: {
+        duration: 0.5,
+        ease: 'power3.inOut',
+      },
+    });
+
+    tlHoverBurger.current
+      .to(firstLine.current, { width: '1.5rem' })
+      .to(secondLine.current, { width: '2rem' }, '-=0.4')
+      .to(burgerContainer.current, { width: '3rem' }, '-=0.2');
+
+    return () => {
+      if (tlHoverBurger.current) {
+        tlHoverBurger.current.kill();
+      }
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (tlHoverBurger.current) {
+      tlHoverBurger.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (tlHoverBurger.current) {
+      tlHoverBurger.current.reverse();
+    }
+  };
+
   return (
     <>
-      <div className={Styles.Container}>
-        <div className={Styles.logo_container}>
-          <div className={Styles.logo}>
+      <div className={styles.Container}>
+        <div className={styles.logo_container}>
+          <div className={styles.logo}>
             <Logo />
           </div>
-          <div className={Styles.title}>Sciaxo</div>
+          <div className={styles.title}>Sciaxo</div>
         </div>
-        <div>'</div>
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          ref={burgerContainer}
+          className={styles.burgerContainer}
+        >
+          <div ref={firstLine} className={styles.firstLine}></div>
+          <div ref={secondLine} className={styles.secondLine}></div>
+        </div>
       </div>
     </>
   );
