@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
         <nav>
           <GlobalNav />
         </nav>
+        <div className='bg'></div>
         {children}
       </body>
     </html>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useLayoutEffect, useRef, useEffect, Component } from 'react';
+import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import styles from './GlobalNav.module.scss';
 import gsap from 'gsap';
 
@@ -7,11 +7,21 @@ export default function GlobalNav() {
   const burgerContainer = useRef();
   const firstLine = useRef();
   const secondLine = useRef();
+  const [click, setClick] = useState(false);
 
   const tlHoverBurger = useRef(null);
+  const tlMenu = useRef(null);
 
   useEffect(() => {
     tlHoverBurger.current = gsap.timeline({
+      paused: true,
+      defaults: {
+        duration: 0.5,
+        ease: 'power3.inOut',
+      },
+    });
+
+    tlMenu.current = gsap.timeline({
       paused: true,
       defaults: {
         duration: 0.5,
@@ -31,15 +41,12 @@ export default function GlobalNav() {
     };
   }, []);
 
-  const handleMouseEnter = () => {
-    if (tlHoverBurger.current) {
-      tlHoverBurger.current.play();
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (tlHoverBurger.current) {
+  const handelClick = () => {
+    setClick(!click);
+    if (click) {
       tlHoverBurger.current.reverse();
+    } else {
+      tlHoverBurger.current.play();
     }
   };
 
@@ -53,8 +60,7 @@ export default function GlobalNav() {
           <div className={styles.title}>Sciaxo</div>
         </div>
         <div
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onClick={handelClick}
           ref={burgerContainer}
           className={styles.burgerContainer}
         >
@@ -62,6 +68,15 @@ export default function GlobalNav() {
           <div ref={secondLine} className={styles.secondLine}></div>
         </div>
       </div>
+      {click && (
+        <div className={styles.menu_container}>
+          <div className={styles.menu}>
+            <div className={styles.menu_item}>Home</div>
+            <div className={styles.menu_item}>About</div>
+            <div className={styles.menu_item}>Contact</div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

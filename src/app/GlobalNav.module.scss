@@ -33,6 +33,17 @@
   gap: 0.2rem;
   border-radius: 0.05em;
   background: $gray-200;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  &:hover {
+    transform: scale(0.9);
+    background: $gray-100;
+    border-radius: 0.5em;
+  }
+  &:active {
+    transform: scale(1);
+    background: $gray-200;
+    border-radius: 0.5em;
+  }
   .firstLine {
     width: 2.5rem;
     height: 0.2rem;
@@ -42,5 +53,32 @@
     width: 4rem;
     height: 0.2rem;
     background: black;
+  }
+}
+
+.menu_container {
+  position: fixed;
+  top: 3.2rem;
+  right: 0rem;
+  .menu {
+    padding: 1rem;
+    background-color: black;
+    border-radius: 0rem 0 0 0.5rem;
+    width: 20vw;
+    color: $gray-100;
+    min-width: 200px;
+
+    .menu_item {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      font: $text-lg;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: $gray-800;
+        color: $primary-500;
+      }
+    }
   }
 }

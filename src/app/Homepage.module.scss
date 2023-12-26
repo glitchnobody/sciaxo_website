@@ -1,5 +1,27 @@
-.hehe {
-  color: $primary-100;
-  font: $text-8xl;
-  font-weight: normal;
+.tagline_Container {
+  margin-top: 0.5rem;
+  font-size: $text-base;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 0 1rem;
+  p {
+    margin: 0;
+    span {
+      color: $primary-500;
+    }
+  }
+  .tagline1 {
+    color: $gray-600;
+  }
+  .tagline2 {
+    color: $gray-500;
+  }
+  .tagline3 {
+    color: $gray-400;
+  }
+  .tagline4 {
+    color: $gray-300;
+  }
 }
